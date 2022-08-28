@@ -1,0 +1,39 @@
+{
+	"extends": [
+		"airbnb",
+		"plugin:prettier/recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:jsx-a11y/recommended",
+		"airbnb-typescript-prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"plugins": ["prettier", "react", "@typescript-eslint", "import"],
+	"rules": {
+		"arrow-parens": "off",
+		"comma-dangle": [
+			"error",
+			{
+				"arrays": "only-multiline",
+				"objects": "only-multiline"
+			}
+		],
+		"import/no-extraneous-dependencies": "off",
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"jsx-quotes": ["error", "prefer-single"],
+		"react/jsx-indent": ["off", "tab"],
+		"react/jsx-indent-props": ["error", "tab"],
+		"no-console": ["warn", { "allow": ["warn", "error"] }],
+		"no-tabs": "off",
+		"no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+		"react/function-component-definition": [2, { "namedComponents": "arrow-function" }]
+	},
+	"settings": {
+		"import/resolver": {
+			"typescript": {}
+		}
+	}
+}

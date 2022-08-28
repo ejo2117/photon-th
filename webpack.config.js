@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const SCSS_MODULE_REGEX = /\.module\.(scss)$/;
 const ASSET_REGEX = /\.(png|svg|jpg|jpeg|gif)$/i;
 const TSX_REGEX = /\.tsx?$/;
 
@@ -9,8 +8,14 @@ module.exports = {
 	mode: 'development',
 	devServer: {
 		static: './dist',
+		proxy: {
+			'/api': {
+				target: 'http://localhost:3000',
+				pathRewrite: { '^/api': '' },
+			},
+		},
 	},
-	entry: './src/index.tsx',
+	entry: './src/frontend/index.tsx',
 	output: {
 		filename: 'main.js',
 		path: path.resolve(__dirname, 'dist'),
@@ -35,12 +40,12 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'Photon Health',
-			template: './src/index.html',
+			template: './src/frontend/index.html',
 		}),
 	],
 	resolve: {
 		alias: {
-			'@components': path.resolve(__dirname, 'src/components'),
+			'@components': path.resolve(__dirname, './src/frontend/components'),
 		},
 		extensions: ['.tsx', '.ts', '.js'],
 	},
