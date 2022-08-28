@@ -1,0 +1,19 @@
+# ignore all files starting with . or ~
+.*
+~*
+
+# ignore project files/directories
+node_modules/
+dist/
+
+# ignore Mac DS Store
+**/.DS_Store
+.DS_Store
+
+# -------------------------
+# BEGIN Whitelisted Files
+# -------------------------
+
+!.gitignore
+!.eslintrc
+!.prettierrc
