@@ -1,13 +1,13 @@
 type Patient = {
-	id: number;
+	id: string;
 	firstName: string;
 	lastName: string;
 	prescriptions: Prescription[];
 };
 
 type Prescription = {
-	id: number;
-	patient: number;
+	id: string;
+	patient: string;
 	status: PrescriptionStatus;
 };
 

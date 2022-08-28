@@ -8,7 +8,7 @@
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"moduleResolution": "Node",
-		"baseUrl": "./src",
+		"baseUrl": "./src/frontend",
 		"paths": {
 			"@components/*": ["components/*"],
 			"@lib/*": ["lib/*"],

@@ -46,6 +46,7 @@ module.exports = {
 	resolve: {
 		alias: {
 			'@components': path.resolve(__dirname, './src/frontend/components'),
+			'@services': path.resolve(__dirname, './src/frontend/services'),
 		},
 		extensions: ['.tsx', '.ts', '.js'],
 	},

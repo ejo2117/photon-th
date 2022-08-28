@@ -1,20 +1,38 @@
 import type { Patient, Prescription } from '../types';
 
-const getPatients = ({ id = false }) => {
-	if (!id) {
-		return 'get all';
-	}
+const DB_URL = 'http://localhost:8080';
 
-	return 'specific patient';
+const getPatients = async ({ id = false }) => {
+	if (!id) {
+		const response = await fetch(`${DB_URL}/api/patients`);
+		const data: Patient[] = await response.json();
+		return data;
+	}
+	const response = await fetch(`${DB_URL}/api/patients/${id}`);
+	const data: Patient = await response.json();
+
+	return data;
 };
 
-const createPatient = ({ firstName, lastName }: Patient) => {
-	return `created ${firstName} ${lastName}`;
+const createPatient = async ({ firstName, lastName }) => {
+	const response = await fetch(`${DB_URL}/api/patients`, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json',
+		},
+		body: JSON.stringify({
+			firstName,
+			lastName,
+		}),
+	});
+	const data: Patient = await response.json();
+
+	return data;
 };
 
 const createPrescription = (patient: Patient) => {
 	const newPrescription: Prescription = {
-		id: 123,
+		id: '123',
 		patient: patient.id,
 		status: 0,
 	};

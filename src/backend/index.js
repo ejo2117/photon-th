@@ -7,13 +7,7 @@ app.use(express.json());
 const port = 3000;
 
 const database = {
-	patients: {
-		123: {
-			firstName: 'John',
-			lastName: 'Doe',
-			id: 123,
-		},
-	},
+	patients: {},
 	prescriptions: {},
 };
 app.get('/', (req, res) => {
@@ -38,6 +32,7 @@ app.post('/patients', (req, res) => {
 	const { firstName, lastName } = req.body || {};
 	if (!firstName || !lastName) {
 		res.status(400).send('Error: Missing required fields');
+		return;
 	}
 	const id = uuidv4();
 	database.patients[id] = {

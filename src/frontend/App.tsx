@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Title from './components/Title';
+import Title from '@components/Title';
+import { createPatient, getPatients } from '@services/database';
 
 const App = () => {
 	const [patients, setPatients] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch('http://localhost:8080/api/patients');
-			const data = await response.json();
-			setPatients(data);
+			const newPatient = await createPatient({
+				firstName: 'John',
+				lastName: 'Doe',
+			});
+			setPatients([newPatient]);
 		};
 		fetchData();
 	}, []);
@@ -16,7 +19,7 @@ const App = () => {
 	return (
 		<>
 			<Title />
-			{patients && <h1>{patients[0].firstName}</h1>}
+			{patients && <h1>{JSON.stringify(patients[0])}</h1>}
 		</>
 	);
 };
