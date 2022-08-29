@@ -7,7 +7,7 @@ type Patient = {
 
 type Prescription = {
 	id: string;
-	patient: string;
+	patientId: string;
 	status: PrescriptionStatus;
 };
 

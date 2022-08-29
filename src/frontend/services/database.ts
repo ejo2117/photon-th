@@ -30,14 +30,41 @@ const createPatient = async ({ firstName, lastName }) => {
 	return data;
 };
 
-const createPrescription = (patient: Patient) => {
-	const newPrescription: Prescription = {
-		id: '123',
-		patient: patient.id,
-		status: 0,
-	};
-	patient.prescriptions.push(newPrescription);
-	return 'done';
+const getPrescriptions = async () => {
+	const response = await fetch(`${DB_URL}/api/prescriptions`);
+	const data: Prescription[] = await response.json();
+	return data;
 };
 
-export { getPatients, createPatient, createPrescription };
+const createPrescription = async (patient: Patient) => {
+	const response = await fetch(`${DB_URL}/api/prescriptions`, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json',
+		},
+		body: JSON.stringify({
+			patientId: patient.id,
+		}),
+	});
+	const data: Prescription = await response.json();
+
+	return data;
+};
+
+const updatePrescriptionStatus = async ({ id, status }) => {
+	const response = await fetch(`${DB_URL}/api/update-status`, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json',
+		},
+		body: JSON.stringify({
+			id,
+			status,
+		}),
+	});
+	const data: Prescription = await response.json();
+
+	return data;
+};
+
+export { getPatients, createPatient, getPrescriptions, createPrescription, updatePrescriptionStatus };

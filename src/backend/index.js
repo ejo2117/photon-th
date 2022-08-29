@@ -39,8 +39,39 @@ app.post('/patients', (req, res) => {
 		id,
 		firstName,
 		lastName,
+		prescriptions: [],
 	};
 	res.json(database.patients[id]);
+});
+
+app.get('/prescriptions', (req, res) => {
+	res.json(Object.values(database.prescriptions));
+});
+
+app.post('/prescriptions', (req, res) => {
+	const { patientId } = req.body || {};
+	if (!patientId || !database.patients[patientId]) {
+		res.status(400).send('Error: Provided field is invalid or has no match');
+		return;
+	}
+	const id = uuidv4();
+	database.prescriptions[id] = {
+		id,
+		patientId,
+		status: 'Pending',
+	};
+	database.patients[patientId].prescriptions.push(id);
+	res.json(database.prescriptions[id]);
+});
+
+app.post('/update-status', (req, res) => {
+	const { id, status } = req.body || {};
+	if (!id || !status || !database.prescriptions[id]) {
+		res.status(400).send('Error: Provided fields are invalid or have no match');
+		return;
+	}
+	database.prescriptions[id].status = status;
+	res.json(database.prescriptions[id]);
 });
 
 app.listen(port, () => {
