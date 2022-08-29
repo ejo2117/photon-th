@@ -5,11 +5,23 @@ import ProviderIcon from '@components/icons/ProviderIcon';
 
 type PropTypes = {
 	userType: 'Provider' | 'Pharmacist';
+	setUserType: React.Dispatch<string>;
 };
 
-const LoginButton = ({ userType }: PropTypes) => {
+const LoginButton = ({ userType, setUserType }: PropTypes) => {
 	return (
-		<Flex direction='column' align='center' justify='center' height={40} width={40} bg='gray.200' borderRadius='md'>
+		<Flex
+			onClick={() => {
+				setUserType(userType);
+			}}
+			direction='column'
+			align='center'
+			justify='center'
+			height={40}
+			width={40}
+			bg='gray.200'
+			borderRadius='md'
+		>
 			{userType === 'Provider' ? <ProviderIcon /> : <PharmacyIcon />}
 			<Heading as='h5' size='md'>
 				{userType}

@@ -2,7 +2,7 @@ import type { Patient, Prescription } from '../types';
 
 const DB_URL = 'http://localhost:8080';
 
-const getPatients = async ({ id = false }) => {
+const getPatients = async (id = false) => {
 	if (!id) {
 		const response = await fetch(`${DB_URL}/api/patients`);
 		const data: Patient[] = await response.json();
@@ -11,7 +11,7 @@ const getPatients = async ({ id = false }) => {
 	const response = await fetch(`${DB_URL}/api/patients/${id}`);
 	const data: Patient = await response.json();
 
-	return data;
+	return [data];
 };
 
 const createPatient = async ({ firstName, lastName }) => {

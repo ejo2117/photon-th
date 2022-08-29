@@ -7,7 +7,26 @@ app.use(express.json());
 const port = 3000;
 
 const database = {
-	patients: {},
+	patients: {
+		abdc: {
+			id: 'abdc',
+			firstName: 'John',
+			lastName: 'Doe',
+			prescriptions: [],
+		},
+		fefewf: {
+			id: 'fefewf',
+			firstName: 'Jane',
+			lastName: 'Doe',
+			prescriptions: [],
+		},
+		ewfoepm: {
+			id: 'ewfoepm',
+			firstName: 'Mister',
+			lastName: 'Rogers',
+			prescriptions: [],
+		},
+	},
 	prescriptions: {},
 };
 app.get('/', (req, res) => {
