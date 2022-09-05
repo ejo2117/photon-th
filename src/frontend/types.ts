@@ -2,7 +2,7 @@ type Patient = {
 	id: string;
 	firstName: string;
 	lastName: string;
-	prescriptions: Prescription[];
+	prescriptions: Prescription['id'][];
 };
 
 type Prescription = {

@@ -30,10 +30,15 @@ const createPatient = async ({ firstName, lastName }: Partial<Patient>) => {
 	return data;
 };
 
-const getPrescriptions = async () => {
-	const response = await fetch(`${DB_URL}/api/prescriptions`);
-	const data: Prescription[] = await response.json();
-	return data;
+const getPrescriptions = async (id = false) => {
+	if (!id) {
+		const response = await fetch(`${DB_URL}/api/prescriptions`);
+		const data: Prescription[] = await response.json();
+		return data;
+	}
+	const response = await fetch(`${DB_URL}/api/prescriptions/${id}`);
+	const data: Prescription = await response.json();
+	return [data];
 };
 
 const createPrescription = async (patient: Patient) => {
@@ -47,6 +52,7 @@ const createPrescription = async (patient: Patient) => {
 		}),
 	});
 	const data: Prescription = await response.json();
+	console.log('🚀 ~ file: database.ts ~ line 50 ~ createPrescription ~ data', data);
 
 	return data;
 };

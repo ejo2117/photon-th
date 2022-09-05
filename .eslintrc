@@ -27,6 +27,8 @@
 		"jsx-quotes": ["error", "prefer-single"],
 		"react/jsx-indent": ["off", "tab"],
 		"react/jsx-indent-props": ["error", "tab"],
+		"react/prop-types": "off",
+		"react/require-default-props": "off",
 		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"no-tabs": "off",
 		"no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],

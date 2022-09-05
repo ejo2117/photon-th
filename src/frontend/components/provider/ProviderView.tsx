@@ -20,7 +20,7 @@ const ProviderView = () => {
 	}, []);
 
 	return (
-		<VStack>
+		<VStack w='100%'>
 			{patients ? <PatientList patients={patients} setPatients={setPatients} /> : <CircularProgress isIndeterminate />}
 		</VStack>
 	);

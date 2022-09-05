@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Patient } from 'types';
-import { createPatient } from '@services/database';
+import { createPatient, createPrescription } from '@services/database';
 
 import { useDisclosure, Button } from '@chakra-ui/react';
 import PatientForm from './PatientForm';
+import PatientCard from './PatientCard';
+import PrescriptionsList from './PrescriptionsList';
 
 type PropTypes = {
 	patients: Patient[];
@@ -11,20 +13,43 @@ type PropTypes = {
 };
 
 const PatientList = ({ patients, setPatients }: PropTypes) => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen: isOpenPatientForm, onOpen: onOpenPatientForm, onClose: onClosePatientForm } = useDisclosure();
+	const { isOpen: isOpenRxForm, onOpen: onOpenRxForm, onClose: onCloseRxForm } = useDisclosure();
+
+	const [selectedPatient, setSelectedPatient] = useState<Patient>(null);
+
 	const addNewPatient = async ({ firstName, lastName }: Partial<Patient>) => {
 		const createdPatient = await createPatient({ firstName, lastName });
 		const updatedList = [...patients, createdPatient];
 		setPatients(updatedList);
 	};
 
+	const writePrescriptionForPatient = async (patient: Patient) => {
+		const createdRx = await createPrescription(patient);
+		const indexToUpdate = patients.findIndex(p => p.id === patient.id);
+		const updatedList = [...patients];
+		updatedList[indexToUpdate].prescriptions.push(createdRx.id);
+		setPatients(updatedList);
+	};
+
+	const viewPatientRx = (patient: Patient) => {
+		setSelectedPatient(patient);
+		onOpenRxForm();
+	};
+
 	return (
 		<>
 			{patients.map(p => (
-				<div>{p.firstName}</div>
+				<PatientCard patient={p} openRxForm={viewPatientRx} />
 			))}
-			<Button onClick={onOpen}>Click Here</Button>
-			<PatientForm addPatient={addNewPatient} isOpen={isOpen} onClose={onClose} />
+			<Button onClick={onOpenPatientForm}>Register Patient</Button>
+			<PatientForm addPatient={addNewPatient} isOpen={isOpenPatientForm} onClose={onClosePatientForm} />
+			<PrescriptionsList
+				patient={selectedPatient}
+				isOpen={isOpenRxForm}
+				onClose={onCloseRxForm}
+				writeRx={writePrescriptionForPatient}
+			/>
 		</>
 	);
 };
