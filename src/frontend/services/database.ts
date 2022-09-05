@@ -14,7 +14,7 @@ const getPatients = async (id = false) => {
 	return [data];
 };
 
-const createPatient = async ({ firstName, lastName }) => {
+const createPatient = async ({ firstName, lastName }: Partial<Patient>) => {
 	const response = await fetch(`${DB_URL}/api/patients`, {
 		method: 'POST',
 		headers: {
@@ -51,7 +51,7 @@ const createPrescription = async (patient: Patient) => {
 	return data;
 };
 
-const updatePrescriptionStatus = async ({ id, status }) => {
+const updatePrescriptionStatus = async ({ id, status }: Partial<Prescription>) => {
 	const response = await fetch(`${DB_URL}/api/update-status`, {
 		method: 'POST',
 		headers: {

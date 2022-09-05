@@ -18,7 +18,8 @@
 			"error",
 			{
 				"arrays": "only-multiline",
-				"objects": "only-multiline"
+				"objects": "only-multiline",
+				"imports": "only-multiline"
 			}
 		],
 		"import/no-extraneous-dependencies": "off",

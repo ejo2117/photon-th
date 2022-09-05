@@ -2,6 +2,7 @@ import React from 'react';
 import type { Patient } from 'types';
 import { createPatient } from '@services/database';
 
+import { useDisclosure, Button } from '@chakra-ui/react';
 import PatientForm from './PatientForm';
 
 type PropTypes = {
@@ -10,7 +11,8 @@ type PropTypes = {
 };
 
 const PatientList = ({ patients, setPatients }: PropTypes) => {
-	const addNewPatient = async ({ firstName, lastName }) => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+	const addNewPatient = async ({ firstName, lastName }: Partial<Patient>) => {
 		const createdPatient = await createPatient({ firstName, lastName });
 		const updatedList = [...patients, createdPatient];
 		setPatients(updatedList);
@@ -21,7 +23,8 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 			{patients.map(p => (
 				<div>{p.firstName}</div>
 			))}
-			<PatientForm addPatient={addNewPatient} />
+			<Button onClick={onOpen}>Click Here</Button>
+			<PatientForm addPatient={addNewPatient} isOpen={isOpen} onClose={onClose} />
 		</>
 	);
 };

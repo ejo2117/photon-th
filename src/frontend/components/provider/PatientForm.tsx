@@ -1,23 +1,75 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
+import {
+	FormControl,
+	FormLabel,
+	FormErrorMessage,
+	Input,
+	Button,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
+} from '@chakra-ui/react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import type { Patient } from 'types';
 
-const PatientForm = ({ addPatient }) => {
+type Inputs = {
+	firstName: string;
+	lastName: string;
+};
+
+type PropTypes = {
+	addPatient: (data: Partial<Patient>) => Promise<void>;
+	isOpen: boolean;
+	onClose: () => void;
+};
+
+const PatientForm = ({ addPatient, isOpen, onClose }: PropTypes) => {
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors, isSubmitting },
+	} = useForm<Inputs>();
+
+	const onSubmit: SubmitHandler<Inputs> = data => {
+		addPatient(data);
+		reset();
+		onClose();
+	};
+
 	return (
-		<form
-			onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-				event.preventDefault();
-			}}
-		>
-			<FormControl isRequired>
-				<FormLabel>First Name</FormLabel>
-				<Input placeholder='First Name' />
-			</FormControl>
-			<FormControl isRequired>
-				<FormLabel>Last Name</FormLabel>
-				<Input placeholder='Last Name' />
-			</FormControl>
-			<Button type='submit'>Create Patient</Button>
-		</form>
+		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
+			<ModalOverlay />
+			<ModalContent as='form' onSubmit={handleSubmit(onSubmit)}>
+				<ModalHeader>Register a New Patient</ModalHeader>
+				<ModalCloseButton />
+				<ModalBody>
+					<FormControl isRequired>
+						<FormLabel>First Name</FormLabel>
+						<Input placeholder='First Name' {...register('firstName')} />
+						<FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
+					</FormControl>
+					<FormControl isRequired>
+						<FormLabel>Last Name</FormLabel>
+						<Input placeholder='Last Name' {...register('lastName')} />
+						<FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
+					</FormControl>
+				</ModalBody>
+				<ModalFooter>
+					<Button onClick={onClose} mr={4}>
+						Close
+					</Button>
+					<Button type='submit' isLoading={isSubmitting}>
+						Create Patient
+					</Button>
+				</ModalFooter>
+			</ModalContent>
+		</Modal>
 	);
 };
 
