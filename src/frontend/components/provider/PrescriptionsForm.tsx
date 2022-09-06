@@ -21,7 +21,7 @@ type PropTypes = {
 	writeRx: (patient: Patient) => Promise<void>;
 };
 
-const PrescriptionsList = ({ patient = null, isOpen, onClose, writeRx }: PropTypes) => {
+const PrescriptionsForm = ({ patient = null, isOpen, onClose, writeRx }: PropTypes) => {
 	return patient ? (
 		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom' scrollBehavior='inside'>
 			<ModalOverlay />
@@ -50,4 +50,4 @@ const PrescriptionsList = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 	) : null;
 };
 
-export default PrescriptionsList;
+export default PrescriptionsForm;

@@ -11,9 +11,7 @@
 		"baseUrl": "./src/frontend",
 		"paths": {
 			"@components/*": ["components/*"],
-			"@lib/*": ["lib/*"],
-			"@services/*": ["services/*"],
-			"@utils/*": ["utils/*"]
+			"@services/*": ["services/*"]
 		}
 	}
 }

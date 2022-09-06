@@ -5,7 +5,7 @@ import { createPatient, createPrescription } from '@services/database';
 import { useDisclosure, Button } from '@chakra-ui/react';
 import PatientForm from './PatientForm';
 import PatientCard from './PatientCard';
-import PrescriptionsList from './PrescriptionsList';
+import PrescriptionsForm from './PrescriptionsForm';
 
 type PropTypes = {
 	patients: Patient[];
@@ -42,9 +42,11 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 			{patients.map(p => (
 				<PatientCard key={p.id} patient={p} openRxForm={viewPatientRx} />
 			))}
-			<Button onClick={onOpenPatientForm}>Register Patient</Button>
+			<Button w='100%' borderStyle='dashed' borderWidth={1} borderColor='black' onClick={onOpenPatientForm}>
+				Register Patient
+			</Button>
 			<PatientForm addPatient={addNewPatient} isOpen={isOpenPatientForm} onClose={onClosePatientForm} />
-			<PrescriptionsList
+			<PrescriptionsForm
 				patient={selectedPatient}
 				isOpen={isOpenRxForm}
 				onClose={onCloseRxForm}

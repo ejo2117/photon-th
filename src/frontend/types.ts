@@ -15,10 +15,10 @@ type DatabasePatient = {
 type Prescription = {
 	id: string;
 	patientId: string;
-	status: PrescriptionStatus;
+	status: keyof typeof PrescriptionStatus;
 };
 
-enum PrescriptionStatus {
+export enum PrescriptionStatus {
 	'Pending',
 	'In Progress',
 	'Filled',

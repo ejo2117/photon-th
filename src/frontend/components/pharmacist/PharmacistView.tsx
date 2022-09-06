@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getPrescriptions } from '@services/database';
-import { Prescription } from 'types';
+import type { Prescription } from 'types';
 import { CircularProgress, VStack } from '@chakra-ui/react';
+import PrescriptionsList from './PrescriptionsList';
 
 const PharmacistView = () => {
 	const [prescriptions, setPrescriptions] = useState<Prescription[]>(null);
@@ -20,7 +21,11 @@ const PharmacistView = () => {
 
 	return (
 		<VStack w='100%'>
-			{prescriptions ? <div>{JSON.stringify(prescriptions)}</div> : <CircularProgress isIndeterminate />}
+			{prescriptions ? (
+				<PrescriptionsList prescriptions={prescriptions} setPrescriptions={setPrescriptions} />
+			) : (
+				<CircularProgress isIndeterminate />
+			)}
 		</VStack>
 	);
 };

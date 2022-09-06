@@ -7,23 +7,24 @@ const app = express();
 app.use(express.json());
 const port = 3000;
 
-const seedDB = () => {
+const seedDB = desiredPatients => {
 	const db = {
 		patients: {},
 		prescriptions: {},
 	};
-	for (let i = 0; i < 15; i++) {
+	for (let i = 0; i < desiredPatients; i++) {
 		const pid = uuidv4();
 		db.patients[pid] = {
 			id: pid,
 			firstName: faker.name.firstName(),
 			lastName: faker.name.lastName(),
+			prescriptions: [],
 		};
 	}
 	return db;
 };
 
-const database = seedDB();
+const database = seedDB(15);
 app.get('/', (req, res) => {
 	res.json({
 		message: 'hello world!',
