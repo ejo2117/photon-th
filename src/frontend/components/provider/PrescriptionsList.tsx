@@ -10,6 +10,7 @@ import {
 	ModalCloseButton,
 	Button,
 	ButtonGroup,
+	VStack,
 } from '@chakra-ui/react';
 import PrescriptionCard from './PrescriptionCard';
 
@@ -29,11 +30,11 @@ const PrescriptionsList = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 				<ModalCloseButton />
 				<ModalBody>
 					{patient.prescriptions.length ? (
-						<ul>
+						<VStack as='ul' gap={2}>
 							{patient.prescriptions.map(p => (
 								<PrescriptionCard key={p.id} prescription={p} />
 							))}
-						</ul>
+						</VStack>
 					) : (
 						'This Patient has no Prescriptions'
 					)}
