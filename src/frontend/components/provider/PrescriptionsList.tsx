@@ -11,6 +11,7 @@ import {
 	Button,
 	ButtonGroup,
 } from '@chakra-ui/react';
+import PrescriptionCard from './PrescriptionCard';
 
 type PropTypes = {
 	patient?: Patient;
@@ -21,7 +22,7 @@ type PropTypes = {
 
 const PrescriptionsList = ({ patient = null, isOpen, onClose, writeRx }: PropTypes) => {
 	return patient ? (
-		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
+		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom' scrollBehavior='inside'>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader>{`${patient.firstName}'s Prescriptions`}</ModalHeader>
@@ -30,7 +31,7 @@ const PrescriptionsList = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 					{patient.prescriptions.length ? (
 						<ul>
 							{patient.prescriptions.map(p => (
-								<li>{p}</li>
+								<PrescriptionCard key={p.id} prescription={p} />
 							))}
 						</ul>
 					) : (
@@ -39,9 +40,7 @@ const PrescriptionsList = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 				</ModalBody>
 				<ModalFooter>
 					<ButtonGroup gap={4}>
-						<Button onClick={onClose} mr={4}>
-							Close
-						</Button>
+						<Button onClick={onClose}>Close</Button>
 						<Button onClick={() => writeRx(patient)}>Write New Prescription</Button>
 					</ButtonGroup>
 				</ModalFooter>

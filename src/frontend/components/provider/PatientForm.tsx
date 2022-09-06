@@ -45,29 +45,32 @@ const PatientForm = ({ addPatient, isOpen, onClose }: PropTypes) => {
 	return (
 		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
 			<ModalOverlay />
-			<ModalContent as='form' onSubmit={handleSubmit(onSubmit)}>
-				<ModalHeader>Register a New Patient</ModalHeader>
-				<ModalCloseButton />
-				<ModalBody>
-					<FormControl isRequired>
-						<FormLabel>First Name</FormLabel>
-						<Input placeholder='First Name' {...register('firstName')} />
-						<FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
-					</FormControl>
-					<FormControl isRequired>
-						<FormLabel>Last Name</FormLabel>
-						<Input placeholder='Last Name' {...register('lastName')} />
-						<FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
-					</FormControl>
-				</ModalBody>
-				<ModalFooter>
-					<Button onClick={onClose} mr={4}>
-						Close
-					</Button>
-					<Button type='submit' isLoading={isSubmitting}>
-						Create Patient
-					</Button>
-				</ModalFooter>
+			<ModalContent>
+				{/* Modal transition breaks with inclusion of 'as' prop */}
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<ModalHeader>Register a New Patient</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<FormControl isRequired>
+							<FormLabel>First Name</FormLabel>
+							<Input placeholder='First Name' {...register('firstName')} />
+							<FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
+						</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Last Name</FormLabel>
+							<Input placeholder='Last Name' {...register('lastName')} />
+							<FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
+						</FormControl>
+					</ModalBody>
+					<ModalFooter>
+						<Button onClick={onClose} mr={4}>
+							Close
+						</Button>
+						<Button type='submit' isLoading={isSubmitting}>
+							Create Patient
+						</Button>
+					</ModalFooter>
+				</form>
 			</ModalContent>
 		</Modal>
 	);

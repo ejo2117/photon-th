@@ -2,6 +2,13 @@ type Patient = {
 	id: string;
 	firstName: string;
 	lastName: string;
+	prescriptions: Prescription[];
+};
+
+type DatabasePatient = {
+	id: string;
+	firstName: string;
+	lastName: string;
 	prescriptions: Prescription['id'][];
 };
 
@@ -17,4 +24,4 @@ enum PrescriptionStatus {
 	'Filled',
 }
 
-export type { Patient, Prescription };
+export type { Patient, Prescription, DatabasePatient };

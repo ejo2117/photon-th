@@ -1,12 +1,33 @@
-import type { Patient, Prescription } from '../types';
+import type { Patient, Prescription, DatabasePatient } from '../types';
 
 const DB_URL = 'http://localhost:8080';
 
-const getPatients = async (id = false) => {
-	if (!id) {
+const getPrescriptionsForPatient = async (patientId: string) => {
+	const response = await fetch(`${DB_URL}/api/patients/${patientId}/prescriptions`);
+	const data: Prescription[] = await response.json();
+	return data;
+};
+
+const getPatients = async (id = '') => {
+	if (!id.length) {
 		const response = await fetch(`${DB_URL}/api/patients`);
-		const data: Patient[] = await response.json();
-		return data;
+		const data: DatabasePatient[] = await response.json();
+
+		const rxResults = [];
+		for (let i = 0; i < data.length; i++) {
+			const patient = data[i];
+			rxResults.push(getPrescriptionsForPatient(patient.id));
+		}
+
+		const rxData: Prescription[][] = await Promise.all(rxResults);
+		const completePatients: Patient[] = [];
+
+		for (let i = 0; i < data.length; i++) {
+			const patient = data[i];
+			completePatients.push({ ...patient, prescriptions: rxData[i] });
+		}
+
+		return completePatients;
 	}
 	const response = await fetch(`${DB_URL}/api/patients/${id}`);
 	const data: Patient = await response.json();
@@ -30,8 +51,8 @@ const createPatient = async ({ firstName, lastName }: Partial<Patient>) => {
 	return data;
 };
 
-const getPrescriptions = async (id = false) => {
-	if (!id) {
+const getPrescriptions = async (id = '') => {
+	if (!id.length) {
 		const response = await fetch(`${DB_URL}/api/prescriptions`);
 		const data: Prescription[] = await response.json();
 		return data;
@@ -52,7 +73,6 @@ const createPrescription = async (patient: Patient) => {
 		}),
 	});
 	const data: Prescription = await response.json();
-	console.log('🚀 ~ file: database.ts ~ line 50 ~ createPrescription ~ data', data);
 
 	return data;
 };

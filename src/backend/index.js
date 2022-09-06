@@ -47,6 +47,22 @@ app.get('/patients/:id', (req, res) => {
 	res.sendStatus(404);
 });
 
+app.get('/patients/:id/prescriptions', (req, res) => {
+	const values = [];
+	const prescriptions = Object.entries(database.prescriptions);
+
+	for (let i = 0; i < prescriptions.length; i++) {
+		const rx = prescriptions[i][1];
+		if (rx.patientId === req.params.id) values.push(rx);
+	}
+
+	if (values) {
+		res.json(values);
+		return;
+	}
+	res.sendStatus(404);
+});
+
 app.post('/patients', (req, res) => {
 	const { firstName, lastName } = req.body || {};
 	if (!firstName || !lastName) {

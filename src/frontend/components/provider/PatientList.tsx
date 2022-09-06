@@ -28,7 +28,7 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 		const createdRx = await createPrescription(patient);
 		const indexToUpdate = patients.findIndex(p => p.id === patient.id);
 		const updatedList = [...patients];
-		updatedList[indexToUpdate].prescriptions.push(createdRx.id);
+		updatedList[indexToUpdate].prescriptions.push(createdRx);
 		setPatients(updatedList);
 	};
 
@@ -40,7 +40,7 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 	return (
 		<>
 			{patients.map(p => (
-				<PatientCard patient={p} openRxForm={viewPatientRx} />
+				<PatientCard key={p.id} patient={p} openRxForm={viewPatientRx} />
 			))}
 			<Button onClick={onOpenPatientForm}>Register Patient</Button>
 			<PatientForm addPatient={addNewPatient} isOpen={isOpenPatientForm} onClose={onClosePatientForm} />
