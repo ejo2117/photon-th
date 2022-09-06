@@ -1,34 +1,29 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
+const { faker } = require('@faker-js/faker');
 
 const app = express();
 app.use(express.json());
 const port = 3000;
 
-const database = {
-	patients: {
-		abdc: {
-			id: 'abdc',
-			firstName: 'John',
-			lastName: 'Doe',
-			prescriptions: [],
-		},
-		fefewf: {
-			id: 'fefewf',
-			firstName: 'Jane',
-			lastName: 'Doe',
-			prescriptions: [],
-		},
-		ewfoepm: {
-			id: 'ewfoepm',
-			firstName: 'Mister',
-			lastName: 'Rogers',
-			prescriptions: [],
-		},
-	},
-	prescriptions: {},
+const seedDB = () => {
+	const db = {
+		patients: {},
+		prescriptions: {},
+	};
+	for (let i = 0; i < 15; i++) {
+		const pid = uuidv4();
+		db.patients[pid] = {
+			id: pid,
+			firstName: faker.name.firstName(),
+			lastName: faker.name.lastName(),
+		};
+	}
+	return db;
 };
+
+const database = seedDB();
 app.get('/', (req, res) => {
 	res.json({
 		message: 'hello world!',
