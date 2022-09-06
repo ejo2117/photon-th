@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPatients } from '@services/database';
 import { CircularProgress, VStack } from '@chakra-ui/react';
-import type { Patient } from 'types';
+import type { Patient } from '@lib/types';
 import PatientList from './PatientList';
 
 const ProviderView = () => {

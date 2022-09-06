@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Prescription } from 'types';
+import type { Prescription } from '@lib/types';
 import { Flex, Box, Spacer, Badge } from '@chakra-ui/react';
 
 type PropTypes = {

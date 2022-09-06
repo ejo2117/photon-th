@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Patient } from 'types';
+import type { Patient } from '@lib/types';
 import { createPatient, createPrescription } from '@services/database';
 
 import { useDisclosure, Button } from '@chakra-ui/react';

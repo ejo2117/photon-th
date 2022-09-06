@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Patient } from 'types';
+import type { Patient } from '@lib/types';
 import { Flex, Box, Spacer, Button } from '@chakra-ui/react';
 
 type PropTypes = {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getPrescriptions } from '@services/database';
-import type { Prescription } from 'types';
+import type { Prescription } from '@lib/types';
 import { CircularProgress, VStack } from '@chakra-ui/react';
 import PrescriptionsList from './PrescriptionsList';
 

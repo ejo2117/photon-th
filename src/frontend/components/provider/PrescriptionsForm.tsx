@@ -1,5 +1,5 @@
 import React from 'react';
-import { Patient } from 'types';
+import { Patient } from '@lib/types';
 import {
 	Modal,
 	ModalOverlay,

@@ -1,4 +1,4 @@
-import type { Patient, Prescription, DatabasePatient } from '../types';
+import type { Patient, Prescription, DatabasePatient } from '@lib/types';
 
 const DB_URL = 'http://localhost:8080';
 

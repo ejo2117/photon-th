@@ -15,7 +15,7 @@ import {
 	ModalCloseButton,
 } from '@chakra-ui/react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import type { Patient } from 'types';
+import type { Patient } from '@lib/types';
 
 type Inputs = {
 	firstName: string;
