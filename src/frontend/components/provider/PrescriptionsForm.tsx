@@ -25,7 +25,7 @@ const PrescriptionsForm = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 	return patient ? (
 		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom' scrollBehavior='inside'>
 			<ModalOverlay />
-			<ModalContent>
+			<ModalContent border='1px' borderColor='black'>
 				<ModalHeader>{`${patient.firstName}'s Prescriptions`}</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
@@ -41,8 +41,12 @@ const PrescriptionsForm = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 				</ModalBody>
 				<ModalFooter>
 					<ButtonGroup gap={4}>
-						<Button onClick={onClose}>Close</Button>
-						<Button onClick={() => writeRx(patient)}>Write New Prescription</Button>
+						<Button onClick={onClose} colorScheme='gray' border='1px' borderColor='gray.500'>
+							Close
+						</Button>
+						<Button onClick={() => writeRx(patient)} colorScheme='blue' border='1px' borderColor='blue.800'>
+							Write New Prescription
+						</Button>
 					</ButtonGroup>
 				</ModalFooter>
 			</ModalContent>

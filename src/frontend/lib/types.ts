@@ -3,6 +3,7 @@ type Patient = {
 	firstName: string;
 	lastName: string;
 	prescriptions: Prescription[];
+	avatar: string;
 };
 
 type DatabasePatient = {
@@ -10,6 +11,7 @@ type DatabasePatient = {
 	firstName: string;
 	lastName: string;
 	prescriptions: Prescription['id'][];
+	avatar: string;
 };
 
 type Prescription = {

@@ -16,6 +16,7 @@ const seedDB = desiredPatients => {
 		const pid = uuidv4();
 		db.patients[pid] = {
 			id: pid,
+			avatar: faker.image.avatar(),
 			firstName: faker.name.firstName(),
 			lastName: faker.name.lastName(),
 			prescriptions: [],
@@ -71,6 +72,7 @@ app.post('/patients', (req, res) => {
 		firstName,
 		lastName,
 		prescriptions: [],
+		avatar: faker.image.avatar(),
 	};
 	res.json(database.patients[id]);
 });

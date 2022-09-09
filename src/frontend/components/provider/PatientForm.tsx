@@ -45,7 +45,7 @@ const PatientForm = ({ addPatient, isOpen, onClose }: PropTypes) => {
 	return (
 		<Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
 			<ModalOverlay />
-			<ModalContent>
+			<ModalContent border='1px' borderColor='gray.500'>
 				{/* Modal transition breaks with inclusion of 'as' prop */}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<ModalHeader>Register a New Patient</ModalHeader>
@@ -63,10 +63,10 @@ const PatientForm = ({ addPatient, isOpen, onClose }: PropTypes) => {
 						</FormControl>
 					</ModalBody>
 					<ModalFooter>
-						<Button onClick={onClose} mr={4}>
+						<Button onClick={onClose} mr={4} colorScheme='gray' border='1px' borderColor='gray.500'>
 							Close
 						</Button>
-						<Button type='submit' isLoading={isSubmitting}>
+						<Button type='submit' isLoading={isSubmitting} colorScheme='green' border='1px' borderColor='green.800'>
 							Register Patient
 						</Button>
 					</ModalFooter>

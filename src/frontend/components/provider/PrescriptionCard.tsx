@@ -7,11 +7,17 @@ type PropTypes = {
 };
 
 const PrescriptionCard = ({ prescription }: PropTypes) => {
+	const badgeColors = {
+		'Pending': 'gray',
+		'In Progress': 'blue',
+		'Filled': 'green',
+	};
+
 	return (
-		<Flex align='center' w='100%' borderRadius={4} p={4} bg='gray.400'>
+		<Flex align='center' w='100%' borderRadius={4} p={4} bg='blue.50'>
 			<Box>{prescription.id}</Box>
 			<Spacer />
-			<Badge>{prescription.status}</Badge>
+			<Badge colorScheme={badgeColors[prescription.status]}>{prescription.status}</Badge>
 		</Flex>
 	);
 };

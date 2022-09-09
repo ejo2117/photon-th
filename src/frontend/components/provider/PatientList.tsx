@@ -74,7 +74,7 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 				<PatientCard key={p.id} patient={p} openRxForm={viewPatientRx} />
 			))} */}
 			{alphabetizePatients(patients)}
-			<Button w='100%' borderStyle='dashed' borderWidth={1} borderColor='black' onClick={onOpenPatientForm}>
+			<Button w='100%' mt={6} borderStyle='dashed' borderWidth={1} borderColor='gray.500' onClick={onOpenPatientForm}>
 				Register Patient
 			</Button>
 			<PatientForm addPatient={addNewPatient} isOpen={isOpenPatientForm} onClose={onClosePatientForm} />
