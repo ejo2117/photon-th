@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import {
 	Modal,
 	ModalOverlay,
@@ -15,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { Prescription, PrescriptionStatus } from '@lib/types';
-import typedKeys from '@lib/utils';
+import { typedKeys } from '@lib/utils';
 
 type PropTypes = {
 	prescription?: Prescription;
@@ -26,16 +27,24 @@ type PropTypes = {
 
 const PrescriptionStatusForm = ({ prescription = null, isOpen, onClose, updateStatus }: PropTypes) => {
 	const [status, setStatus] = useState<keyof typeof PrescriptionStatus>(prescription?.status ?? 'Pending');
+	const [updater, setUpdater] = useState<'active' | 'inactive'>('inactive');
 	useEffect(() => {
 		prescription && setStatus(prescription.status);
 
 		return () => {
 			setStatus('Pending');
+			setUpdater('inactive');
 		};
 	}, [prescription]);
 
 	const handleChange = event => {
 		setStatus(event);
+		setUpdater('active');
+	};
+
+	const updateButtonProps = {
+		active: { colorScheme: 'green', border: '1px', borderColor: 'green.800' },
+		inactive: { disabled: true, colorScheme: 'gray', border: '1px', borderColor: 'gray.500' },
 	};
 
 	return prescription ? (
@@ -57,8 +66,12 @@ const PrescriptionStatusForm = ({ prescription = null, isOpen, onClose, updateSt
 				</ModalBody>
 				<ModalFooter>
 					<ButtonGroup gap={4}>
-						<Button onClick={onClose}>Close</Button>
-						<Button onClick={() => updateStatus(prescription, status)}>Update Status</Button>
+						<Button colorScheme='gray' border='1px' borderColor='gray.500' onClick={onClose}>
+							Close
+						</Button>
+						<Button {...updateButtonProps[updater]} onClick={() => updateStatus(prescription, status)}>
+							Update Status
+						</Button>
 					</ButtonGroup>
 				</ModalFooter>
 			</ModalContent>

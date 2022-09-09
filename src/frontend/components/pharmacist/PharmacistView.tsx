@@ -20,7 +20,7 @@ const PharmacistView = () => {
 	}, []);
 
 	return (
-		<VStack w='100%'>
+		<VStack w='100%' h='100%'>
 			{prescriptions ? (
 				<PrescriptionsList prescriptions={prescriptions} setPrescriptions={setPrescriptions} />
 			) : (

@@ -5,6 +5,7 @@ import ProviderIcon from '@components/icons/ProviderIcon';
 // import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
 import { UserType } from '@lib/types';
+import { capitalizeFirstLetter } from '@lib/utils';
 
 type PropTypes = {
 	userType: UserType;
@@ -30,7 +31,7 @@ const LoginButton = ({ userType }: PropTypes) => {
 		>
 			{userType === 'provider' ? <ProviderIcon /> : <PharmacyIcon />}
 			<Heading as='h5' size='md'>
-				{userType}
+				{capitalizeFirstLetter(userType)}
 			</Heading>
 		</Flex>
 	);

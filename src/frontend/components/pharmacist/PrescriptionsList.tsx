@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { updatePrescriptionStatus } from '@services/database';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Button, Flex, Spacer, useDisclosure } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, Flex, Spacer, useDisclosure, VStack, Code } from '@chakra-ui/react';
 import { PrescriptionStatus } from '@lib/types';
 import type { Prescription } from '@lib/types';
-import typedKeys from '@lib/utils';
+import { typedKeys } from '@lib/utils';
 import PrescriptionStatusForm from './PrescriptionStatusForm';
 
 type PropTypes = {
@@ -32,21 +32,29 @@ const PrescriptionsList = ({ prescriptions, setPrescriptions }: PropTypes) => {
 
 	const getCardsWithStatus = (prescriptionList: Prescription[], status: keyof typeof PrescriptionStatus) => {
 		const filteredPrescriptions = prescriptionList.filter(p => p.status === status);
-		return filteredPrescriptions.map(fp => (
-			<Flex align='center' w='100%' borderRadius={4} p={4} bg='gray.400'>
-				<Box>{`${fp.id}`}</Box>
-				<Spacer />
-				<Button onClick={() => showRxDetail(fp)}>View Prescriptions</Button>
-			</Flex>
-		));
+		return (
+			<VStack gap={4}>
+				{filteredPrescriptions.map(fp => (
+					<Flex align='center' w='100%' borderRadius={4} p={4} bg='gray.200' border='1px' borderColor='gray.500'>
+						<Code>{`${fp.id}`}</Code>
+						<Spacer />
+						<Button colorScheme='gray' border='1px' borderColor='gray.500' onClick={() => showRxDetail(fp)}>
+							View Prescription
+						</Button>
+					</Flex>
+				))}
+			</VStack>
+		);
 	};
 
 	return (
 		<>
-			<Tabs>
-				<TabList>
+			<Tabs w='100%' h='100%' position='relative'>
+				<TabList position='sticky' top='0' bgColor='white' zIndex={1}>
 					{typedKeys(PrescriptionStatus).map(s => (
-						<Tab>{s}</Tab>
+						<Tab as='h5' fontWeight='bold'>
+							{s}
+						</Tab>
 					))}
 				</TabList>
 				<TabPanels>
