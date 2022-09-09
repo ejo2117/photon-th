@@ -70,9 +70,6 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 
 	return (
 		<>
-			{/* {patients.map(p => (
-				<PatientCard key={p.id} patient={p} openRxForm={viewPatientRx} />
-			))} */}
 			{alphabetizePatients(patients)}
 			<Button w='100%' mt={6} borderStyle='dashed' borderWidth={1} borderColor='gray.500' onClick={onOpenPatientForm}>
 				Register Patient

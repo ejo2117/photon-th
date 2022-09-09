@@ -12,6 +12,7 @@ import {
 	ButtonGroup,
 	VStack,
 } from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import PrescriptionCard from './PrescriptionCard';
 
 type PropTypes = {
@@ -31,9 +32,22 @@ const PrescriptionsForm = ({ patient = null, isOpen, onClose, writeRx }: PropTyp
 				<ModalBody>
 					{patient.prescriptions.length ? (
 						<VStack as='ul' gap={2}>
-							{patient.prescriptions.map(p => (
-								<PrescriptionCard key={p.id} prescription={p} />
-							))}
+							<AnimatePresence mode='popLayout'>
+								{patient.prescriptions
+									.map(p => (
+										<motion.div
+											layout
+											key={p.id}
+											initial={{ scale: 0.8, opacity: 0, y: -50 }}
+											animate={{ scale: 1, opacity: 1, y: 0 }}
+											transition={{ type: 'spring', restDelta: 0.5 }}
+											style={{ width: '100%' }}
+										>
+											<PrescriptionCard key={p.id} prescription={p} />
+										</motion.div>
+									))
+									.reverse()}
+							</AnimatePresence>
 						</VStack>
 					) : (
 						'This Patient has no Prescriptions'

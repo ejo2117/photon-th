@@ -4,6 +4,8 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, Flex, Spacer, useDiscl
 import { PrescriptionStatus } from '@lib/types';
 import type { Prescription } from '@lib/types';
 import { typedKeys } from '@lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
+import PrescriptionCard from '@components/provider/PrescriptionCard';
 import PrescriptionStatusForm from './PrescriptionStatusForm';
 
 type PropTypes = {
@@ -34,15 +36,20 @@ const PrescriptionsList = ({ prescriptions, setPrescriptions }: PropTypes) => {
 		const filteredPrescriptions = prescriptionList.filter(p => p.status === status);
 		return (
 			<VStack gap={4}>
-				{filteredPrescriptions.map(fp => (
-					<Flex align='center' w='100%' borderRadius={4} p={4} bg='gray.200' border='1px' borderColor='gray.500'>
-						<Code>{`${fp.id}`}</Code>
-						<Spacer />
-						<Button colorScheme='gray' border='1px' borderColor='gray.500' onClick={() => showRxDetail(fp)}>
-							View Prescription
-						</Button>
-					</Flex>
-				))}
+				<AnimatePresence mode='popLayout'>
+					{filteredPrescriptions.map(fp => (
+						<motion.div
+							layout
+							key={fp.id}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.8, opacity: 0, x: 400 }}
+							transition={{ type: 'spring' }}
+							style={{ width: '100%' }}
+						>
+							<PrescriptionCard prescription={fp} withButton clickFunction={() => showRxDetail(fp)} />
+						</motion.div>
+					))}
+				</AnimatePresence>
 			</VStack>
 		);
 	};
