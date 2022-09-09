@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
+import Nav from './Nav';
 
 const Layout = () => {
 	return (
-		<Box minH='100vh' p={8}>
+		<Box minH='100vh' position='relative'>
+			<Nav />
 			<Outlet />
 		</Box>
 	);

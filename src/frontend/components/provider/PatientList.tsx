@@ -14,7 +14,19 @@ type PropTypes = {
 
 const PatientHeading = ({ children }) => {
 	return (
-		<Heading as='h5' size='md' textAlign='left' position='sticky' top={0} w='100%' bgColor='white' zIndex={1} mt={6}>
+		<Heading
+			as='h5'
+			size='md'
+			textAlign='left'
+			position='sticky'
+			top={16}
+			w='100%'
+			bgColor='white'
+			zIndex={1}
+			mt={6}
+			borderBottom='1px'
+			borderColor='gray.500'
+		>
 			{children}
 		</Heading>
 	);
@@ -70,6 +82,7 @@ const PatientList = ({ patients, setPatients }: PropTypes) => {
 
 	return (
 		<>
+			<Heading size='md'>Patients On File</Heading>
 			{alphabetizePatients(patients)}
 			<Button w='100%' mt={6} borderStyle='dashed' borderWidth={1} borderColor='gray.500' onClick={onOpenPatientForm}>
 				Register Patient

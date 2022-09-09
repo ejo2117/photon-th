@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getPatients } from '@services/database';
-import { CircularProgress, Flex, VStack } from '@chakra-ui/react';
+import { CircularProgress, Flex } from '@chakra-ui/react';
 import type { Patient } from '@lib/types';
 import PatientList from './PatientList';
 
@@ -20,7 +20,7 @@ const ProviderView = () => {
 	}, []);
 
 	return (
-		<Flex w='100%' position='relative' direction='column' gap={4}>
+		<Flex w='100%' position='relative' direction='column' gap={4} p={8}>
 			{patients ? <PatientList patients={patients} setPatients={setPatients} /> : <CircularProgress isIndeterminate />}
 		</Flex>
 	);

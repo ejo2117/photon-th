@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Tooltip } from '@chakra-ui/react';
 import PharmacyIcon from '@components/icons/PharmacyIcon';
 import ProviderIcon from '@components/icons/ProviderIcon';
 // import { useNavigate } from 'react-router-dom';
@@ -14,26 +14,34 @@ type PropTypes = {
 const LoginButton = ({ userType }: PropTypes) => {
 	// const navigate = useNavigate();
 	const { loginAs } = useAuth();
+
+	const tooltips = {
+		provider: 'Manage patients, and write prescriptions',
+		pharmacist: 'Manage prescription data',
+	};
+
 	return (
-		<Flex
-			onClick={() => {
-				// setUserType(userType);
-				// navigate(`/${userType.toLowerCase()}`);
-				loginAs(userType);
-			}}
-			direction='column'
-			align='center'
-			justify='center'
-			height={40}
-			width={40}
-			bg='gray.200'
-			borderRadius='md'
-		>
-			{userType === 'provider' ? <ProviderIcon /> : <PharmacyIcon />}
-			<Heading as='h5' size='md'>
-				{capitalizeFirstLetter(userType)}
-			</Heading>
-		</Flex>
+		<Tooltip label={tooltips[userType]} aria-label='A tooltip'>
+			<Flex
+				onClick={() => {
+					// setUserType(userType);
+					// navigate(`/${userType.toLowerCase()}`);
+					loginAs(userType);
+				}}
+				direction='column'
+				align='center'
+				justify='center'
+				height={40}
+				width={40}
+				bg='gray.200'
+				borderRadius='md'
+			>
+				{userType === 'provider' ? <ProviderIcon /> : <PharmacyIcon />}
+				<Heading as='h5' size='md'>
+					{capitalizeFirstLetter(userType)}
+				</Heading>
+			</Flex>
+		</Tooltip>
 	);
 };
 

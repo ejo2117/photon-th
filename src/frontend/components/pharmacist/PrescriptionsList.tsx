@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { updatePrescriptionStatus } from '@services/database';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Button, Flex, Spacer, useDisclosure, VStack, Code } from '@chakra-ui/react';
+import {
+	Tabs,
+	TabList,
+	TabPanels,
+	Tab,
+	TabPanel,
+	Button,
+	Flex,
+	Spacer,
+	useDisclosure,
+	VStack,
+	Code,
+	Heading,
+} from '@chakra-ui/react';
 import { PrescriptionStatus } from '@lib/types';
 import type { Prescription } from '@lib/types';
 import { typedKeys } from '@lib/utils';
@@ -56,6 +69,7 @@ const PrescriptionsList = ({ prescriptions, setPrescriptions }: PropTypes) => {
 
 	return (
 		<>
+			<Heading size='md'>Prescriptions On File</Heading>
 			<Tabs w='100%' h='100%' position='relative'>
 				<TabList position='sticky' top='0' bgColor='white' zIndex={1}>
 					{typedKeys(PrescriptionStatus).map(s => (
