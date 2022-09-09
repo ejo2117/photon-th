@@ -7,6 +7,7 @@ const TSX_REGEX = /\.tsx?$/;
 module.exports = {
 	mode: 'development',
 	devServer: {
+		historyApiFallback: true,
 		static: './dist',
 		proxy: {
 			'/api': {
@@ -19,6 +20,7 @@ module.exports = {
 	output: {
 		filename: 'main.js',
 		path: path.resolve(__dirname, 'dist'),
+		publicPath: '/',
 		clean: true,
 	},
 	watchOptions: {
@@ -46,6 +48,7 @@ module.exports = {
 	resolve: {
 		alias: {
 			'@components': path.resolve(__dirname, './src/frontend/components'),
+			'@hooks': path.resolve(__dirname, './src/frontend/hooks'),
 			'@services': path.resolve(__dirname, './src/frontend/services'),
 			'@lib': path.resolve(__dirname, './src/frontend/lib'),
 		},

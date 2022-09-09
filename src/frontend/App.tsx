@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
-import { Center } from '@chakra-ui/react';
-import Login from '@components/login/Login';
-import ProviderView from '@components/provider/ProviderView';
-import PharmacistView from '@components/pharmacist/PharmacistView';
+import React from 'react';
+
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '@hooks/useAuth';
 
 const App = () => {
-	const [userType, setUserType] = useState(null);
+	const { userType } = useAuth();
 
-	return (
-		<Center minH='100vh' p={8}>
-			{!userType && <Login setUserType={setUserType} />}
-			{userType === 'Pharmacist' && <PharmacistView />}
-			{userType === 'Provider' && <ProviderView />}
-		</Center>
-	);
+	return userType ? <Navigate to={`/${userType}`} /> : <Navigate to='/login' />;
 };
 
 export default App;

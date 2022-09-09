@@ -2,17 +2,23 @@ import React from 'react';
 import { Flex, Heading } from '@chakra-ui/react';
 import PharmacyIcon from '@components/icons/PharmacyIcon';
 import ProviderIcon from '@components/icons/ProviderIcon';
+// import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@hooks/useAuth';
+import { UserType } from '@lib/types';
 
 type PropTypes = {
-	userType: 'Provider' | 'Pharmacist';
-	setUserType: React.Dispatch<string>;
+	userType: UserType;
 };
 
-const LoginButton = ({ userType, setUserType }: PropTypes) => {
+const LoginButton = ({ userType }: PropTypes) => {
+	// const navigate = useNavigate();
+	const { loginAs } = useAuth();
 	return (
 		<Flex
 			onClick={() => {
-				setUserType(userType);
+				// setUserType(userType);
+				// navigate(`/${userType.toLowerCase()}`);
+				loginAs(userType);
 			}}
 			direction='column'
 			align='center'
@@ -22,7 +28,7 @@ const LoginButton = ({ userType, setUserType }: PropTypes) => {
 			bg='gray.200'
 			borderRadius='md'
 		>
-			{userType === 'Provider' ? <ProviderIcon /> : <PharmacyIcon />}
+			{userType === 'provider' ? <ProviderIcon /> : <PharmacyIcon />}
 			<Heading as='h5' size='md'>
 				{userType}
 			</Heading>

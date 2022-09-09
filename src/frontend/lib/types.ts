@@ -18,10 +18,12 @@ type Prescription = {
 	status: keyof typeof PrescriptionStatus;
 };
 
+type UserType = 'provider' | 'pharmacist';
+
 export enum PrescriptionStatus {
 	'Pending',
 	'In Progress',
 	'Filled',
 }
 
-export type { Patient, Prescription, DatabasePatient };
+export type { Patient, Prescription, DatabasePatient, UserType };
