@@ -38,7 +38,9 @@ rootElement.render(
 							}
 						/>
 					</Route>
-					<Route path='/login' element={<Login />} />
+					<Route element={<Layout />}>
+						<Route path='/login' element={<Login />} />
+					</Route>
 				</Routes>
 			</AuthProvider>
 		</BrowserRouter>

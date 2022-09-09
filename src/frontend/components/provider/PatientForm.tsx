@@ -56,7 +56,7 @@ const PatientForm = ({ addPatient, isOpen, onClose }: PropTypes) => {
 							<Input placeholder='First Name' {...register('firstName')} />
 							<FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
 						</FormControl>
-						<FormControl isRequired>
+						<FormControl isRequired mt={4}>
 							<FormLabel>Last Name</FormLabel>
 							<Input placeholder='Last Name' {...register('lastName')} />
 							<FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
@@ -67,7 +67,7 @@ const PatientForm = ({ addPatient, isOpen, onClose }: PropTypes) => {
 							Close
 						</Button>
 						<Button type='submit' isLoading={isSubmitting}>
-							Create Patient
+							Register Patient
 						</Button>
 					</ModalFooter>
 				</form>
